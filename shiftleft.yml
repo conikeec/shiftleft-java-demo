@@ -3,9 +3,4 @@ build_rules:
     severity:
       - SEVERITY_MEDIUM_IMPACT
       - SEVERITY_HIGH_IMPACT
-    type:
-      - SQL Injection
-      - Sensitive Data Leak
-    owasp_category:
-      - a1-injection
-    threshold: 1
+      - SEVERITY_LOW_IMPACT

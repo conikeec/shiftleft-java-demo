@@ -56,13 +56,13 @@ public class DataLoader implements CommandLineRunner {
   }
 
   public final class Constants {
-    
-        private Constants() {
-                // restrict instantiation
-        }
-    
-        public static final double PI = 3.14159;
-        public static final double PLANCK_CONSTANT = 6.62606896e-34;
+
+    private Constants() {
+      // restrict instantiation
+    }
+
+    public static final double PI = 3.14159;
+    public static final double PLANCK_CONSTANT = 6.62606896e-34;
   }
 
   private boolean connectToAws() {
@@ -81,7 +81,7 @@ public class DataLoader implements CommandLineRunner {
   private boolean connectToMySQL() {
 
     log.info("Start Loading MySQL Properties");
-    log.info("Url is {}", env.getProperty("db.url"));
+
     log.info("UserName is {}", env.getProperty("db.username"));
     log.info("Password is {}", env.getProperty("db.password"));
     log.info("End Loading MySQL Properties");

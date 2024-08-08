@@ -359,6 +359,38 @@ public class CustomerController {
       return customer;
 	}
 
+	public Customer getCustomer(@PathVariable("customerId") Long customerId) {
+
+		/* validate customer Id parameter */
+      if (null == customerId) {
+        throw new InvalidCustomerRequestException();
+      }
+
+      Customer customer = customerRepository.findOne(customerId);
+		if (null == customer) {
+		  throw new CustomerNotFoundException();
+	  }
+
+	  Account account = new Account(4242l,1234, "savings", 1, 0);
+
+	  // Encrypting account data before logging
+	  String encryptedAccountData = encryptData(account.toString());
+	  log.info("Encrypted Account Data is {}", encryptedAccountData);
+
+	  // Hashing customer data before logging
+	  String hashedCustomerData = hashData(customer.toString());
+	  log.info("Hashed Customer Data is {}", hashedCustomerData);
+
+      try {
+        dispatchEventToSalesForce(String.format(" Customer %s Logged into SalesForce", customer));
+      } catch (Exception e) {
+        log.error("Failed to Dispatch Event to SalesForce . Details {} ", e.getLocalizedMessage());
+
+      }
+
+      return customer;
+	}
+
 	private String encryptData(String data) {
 		// Use javax.crypto for encryption
 		// This is a placeholder implementation
@@ -623,6 +655,7 @@ public class CustomerController {
 	}
 
 }
+
 
 
 

@@ -18,17 +18,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class SearchController {
 
   @RequestMapping(value = "/search/user", method = RequestMethod.GET)
-  public String doGetSearch(@RequestParam String foo, HttpServletResponse response, HttpServletRequest request) {
-    java.lang.Object message = new Object();
-    try {
-      String ACCESS_KEY_ID = "AKIA2E0A8F3B244C9986";
-      String SECRET_KEY = "7CE556A3BC234CC1FF9E8A5C324C0BB70AA21B6D";      
-      ExpressionParser parser = new SpelExpressionParser();
-      Expression exp = parser.parseExpression(foo);
-      message = (Object) exp.getValue();
-    } catch (Exception ex) {
-      System.out.println(ex.getMessage());
-    }
-    return message.toString();
-  }
-}
+	@RequestMapping(value = "/search/user", method = RequestMethod.GET)
+	public String doGetSearch(@RequestParam String foo, HttpServletResponse response, HttpServletRequest request) {
+		String message = null;
+		try {
+			// Removed the instantiation of java.lang.Object as it's unnecessary.
+			String ACCESS_KEY_ID = "AKIA2E0A8F3B244C9986";
+			String SECRET_KEY = "7CE556A3BC234CC1FF9E8A5C324C0BB70AA21B6D";      
+			ExpressionParser parser = new SpelExpressionParser();
+			Expression exp = parser.parseExpression(foo);
+			message = exp.getValue(String.class); // Specify the return type explicitly.
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+		return message != null ? message : ""; // Return an empty string if message is null.
+	}
+
+

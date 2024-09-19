@@ -67,7 +67,7 @@ public class DataLoader implements CommandLineRunner {
 
   private boolean connectToAws() {
 
-    log.info("Start Loading AWS Properties");
+    
     log.info("AWS AccessKey is {} and SecretKey is {}", env.getProperty("aws.accesskey"),
         env.getProperty("aws.secretkey"));
     log.info("AWS Bucket is {}", env.getProperty("aws.bucket"));
